@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
         speed = 6f;
         horizontalScreenLimit = 11.5f;
         verticalScreenLimit = 7.5f;
+        FindObjectOfType<GameManager>().loselives(lives);
         lives = 3;
+
     }
 
     // Update is called once per frame
@@ -60,8 +62,10 @@ public class Player : MonoBehaviour
         //lives = lives - 1;
         //lives -= 1;
         lives--;
+        FindObjectOfType<GameManager>().loselives(lives);
         if (lives == 0)
         {
+            Debug.Log("death");
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
