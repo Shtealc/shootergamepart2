@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     {
         speed = 6f;
         horizontalScreenLimit = 11.5f;
-        verticalScreenLimit = 7.5f;
+        verticalScreenLimit = 3f;
         FindObjectOfType<GameManager>().loselives(lives);
         lives = 3;
 
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
         if (transform.position.y > verticalScreenLimit || transform.position.y <= -verticalScreenLimit)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
+            transform.position = new Vector3(transform.position.x, transform.position.y / 2, 0);
         }
     }
 
