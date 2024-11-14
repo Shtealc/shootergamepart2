@@ -4,29 +4,27 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-
     public GameObject explosion;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
-    private void OnTriggerEnter2D(Collider2D whatDidIHit)
+    private void OnTriggerEnter2D(Collider2D whatIHit)
     {
-        if (whatDidIHit.tag == "Player")
+        if (whatIHit.tag == "Player")
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().EarnScore(1);
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
-        }
     }
+}
 
