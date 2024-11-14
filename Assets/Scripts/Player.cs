@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private float horizontalScreenSize = 11.5f;
-    private float verticalScreenSize = 7.5f;
+    private float verticalScreenSize = 3f;
     private float speed;
     private int lives;
     private int shooting;
@@ -24,10 +24,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         speed = 6f;
+        FindObjectOfType<GameManager>().loselives(lives);
         lives = 3;
         shooting = 1;
         hasShield = false;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
         }
         if (transform.position.y > verticalScreenSize || transform.position.y < -verticalScreenSize)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
+            transform.position = new Vector3(transform.position.x, transform.position.y / 2);
         }
     }
 
@@ -75,6 +77,8 @@ public class Player : MonoBehaviour
     }
 
     public void LoseALife()
+
+ 
     {
         if (hasShield)
         {
@@ -85,9 +89,12 @@ public class Player : MonoBehaviour
         else
         {
             lives--;
-
+            
             if (lives <= 0)
             {
+                FindObjectOfType<GameManager>().loselives(lives);
+
+                Debug.Log("death");
                 gameManager.GameOver();
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(this.gameObject); 
@@ -154,6 +161,7 @@ public class Player : MonoBehaviour
 
         if (whatIHit.tag == "Enemy")
         {
+
             LoseALife();
         }
     }
